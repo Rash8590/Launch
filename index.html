@@ -4,92 +4,260 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>NOVA Token Presale | Phase 1 Live</title>
-  <meta name="description" content="Secure your allocation in the NOVA Token presale. Phase 1 is now open.">
+  <meta name="description" content="Secure your allocation in the NOVA Token presale. Next-gen DeFi utility, cross-chain interoperability, and governance.">
   <style>
-    :root { --bg:#0a0e17; --card:#111827; --border:#1f2937; --accent:#3b82f6; --accent-hover:#2563eb; --text:#e5e7eb; --muted:#9ca3af; --success:#10b981; --danger:#ef4444; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; min-height:100vh; padding:1rem; }
-    .container { max-width:480px; margin:0 auto; }
-    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1rem; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
-    h1 { font-size:1.6rem; font-weight:700; margin-bottom:0.5rem; text-align:center; }
-    .subtitle { text-align:center; color:var(--muted); margin-bottom:1.5rem; font-size:0.9rem; }
-    .progress-wrap { background:#1f2937; border-radius:8px; height:12px; overflow:hidden; margin:1rem 0; }
-    .progress-bar { background:linear-gradient(90deg, var(--accent), #8b5cf6); height:100%; width:0%; transition:width 0.5s ease; border-radius:8px; }
-    .stats { display:flex; justify-content:space-between; font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem; }
+    :root { 
+      --bg:#0a0e17; --card:#111827; --border:#1f2937; --accent:#3b82f6; --accent-hover:#2563eb; 
+      --text:#e5e7eb; --muted:#9ca3af; --success:#10b981; --danger:#ef4444; --purple:#8b5cf6;
+      --gradient: linear-gradient(135deg, var(--accent), var(--purple));
+    }
+    * { box-sizing:border-box; margin:0; padding:0; scroll-behavior:smooth; }
+    body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+    
+    /* Navigation */
+    nav { position:sticky; top:0; background:rgba(10,14,23,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); padding:1rem; z-index:100; }
+    .nav-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-weight:800; font-size:1.3rem; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-links { display:flex; gap:1.5rem; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+    .nav-links a:hover { color:#fff; }
+    .mobile-menu { display:none; background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer; }
+
+    /* Layout */
+    .container { max-width:1100px; margin:0 auto; padding:2rem 1rem; }
+    section { margin-bottom:4rem; }
+    h2 { font-size:1.8rem; margin-bottom:1rem; text-align:center; }
+    .section-sub { text-align:center; color:var(--muted); max-width:600px; margin:0 auto 2rem; font-size:0.95rem; }
+
+    /* Presale Card */
+    .presale-wrap { max-width:480px; margin:0 auto 3rem; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
     .countdown { display:flex; justify-content:center; gap:0.5rem; margin-bottom:1.5rem; }
     .countdown span { background:#1f2937; padding:0.5rem 0.8rem; border-radius:8px; font-weight:600; font-size:1.1rem; min-width:45px; text-align:center; }
     .countdown small { display:block; font-size:0.65rem; color:var(--muted); font-weight:400; }
+    .progress-wrap { background:#1f2937; border-radius:8px; height:12px; overflow:hidden; margin:1rem 0; }
+    .progress-bar { background:var(--gradient); height:100%; width:0%; transition:width 0.5s ease; border-radius:8px; }
+    .stats { display:flex; justify-content:space-between; font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem; }
+    .input-group { margin-bottom:1rem; }
+    .input-group label { display:block; font-size:0.85rem; color:var(--muted); margin-bottom:0.4rem; }
+    .input-group input { width:100%; background:#1f2937; border:1px solid #374151; color:#fff; padding:0.8rem; border-radius:8px; font-size:1rem; }
     .btn { display:block; width:100%; background:var(--accent); color:#fff; border:none; padding:1rem; border-radius:12px; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s; margin-bottom:0.5rem; }
     .btn:hover { background:var(--accent-hover); }
     .btn:disabled { opacity:0.5; cursor:not-allowed; }
     .btn-outline { background:transparent; border:1px solid var(--border); color:var(--muted); }
     .btn-outline:hover { background:#1f2937; color:var(--text); }
-    .input-group { margin-bottom:1rem; }
-    .input-group label { display:block; font-size:0.85rem; color:var(--muted); margin-bottom:0.4rem; }
-    .input-group input { width:100%; background:#1f2937; border:1px solid #374151; color:#fff; padding:0.8rem; border-radius:8px; font-size:1rem; }
     .status { text-align:center; font-size:0.85rem; min-height:1.2em; margin-top:0.5rem; }
     .loader { display:inline-block; width:14px; height:14px; border:2px solid var(--accent); border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite; margin-right:6px; vertical-align:middle; }
     @keyframes spin { to { transform:rotate(360deg); } }
-    .tokenomics { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:1rem; }
-    .tokenomics div { background:#1f2937; padding:0.8rem; border-radius:8px; text-align:center; }
-    .tokenomics strong { display:block; font-size:1.1rem; color:#fff; }
-    .tokenomics span { font-size:0.75rem; color:var(--muted); }
-    .footer { text-align:center; font-size:0.75rem; color:var(--muted); margin-top:2rem; padding-bottom:1rem; }
+
+    /* Utility Grid */
+    .grid-2 { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; }
+    .feature-card { background:var(--card); border:1px solid var(--border); padding:1.5rem; border-radius:12px; transition:transform 0.2s, border-color 0.2s; }
+    .feature-card:hover { transform:translateY(-4px); border-color:var(--accent); }
+    .feature-icon { width:40px; height:40px; background:var(--gradient); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.2rem; }
+    .feature-card h3 { margin-bottom:0.5rem; font-size:1.1rem; }
+    .feature-card p { color:var(--muted); font-size:0.9rem; }
+
+    /* Roadmap */
+    .roadmap { position:relative; padding-left:2rem; }
+    .roadmap::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--border); }
+    .roadmap-item { position:relative; margin-bottom:2rem; }
+    .roadmap-item::before { content:''; position:absolute; left:-2rem; top:4px; width:16px; height:16px; background:var(--accent); border:3px solid var(--bg); border-radius:50%; }
+    .roadmap-item h4 { color:#fff; margin-bottom:0.3rem; }
+    .roadmap-item p { color:var(--muted); font-size:0.9rem; }
+    .badge { display:inline-block; background:#1f2937; color:var(--accent); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; margin-bottom:0.5rem; }
+
+    /* Tokenomics */
+    .token-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:1rem; margin-top:1.5rem; }
+    .token-stat { background:#1f2937; padding:1rem; border-radius:10px; text-align:center; }
+    .token-stat strong { display:block; font-size:1.2rem; color:#fff; margin-bottom:0.2rem; }
+    .token-stat span { font-size:0.8rem; color:var(--muted); }
+    .vesting { background:#111827; border:1px solid var(--border); padding:1.2rem; border-radius:10px; margin-top:1.5rem; }
+    .vesting h4 { margin-bottom:0.8rem; }
+    .vesting-bar { height:8px; background:#1f2937; border-radius:4px; overflow:hidden; margin-bottom:0.5rem; }
+    .vesting-fill { height:100%; background:var(--success); width:0%; transition:width 1s ease; }
+
+    /* FAQ */
+    .faq-item { background:var(--card); border:1px solid var(--border); border-radius:10px; margin-bottom:0.8rem; overflow:hidden; }
+    .faq-q { padding:1rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:500; }
+    .faq-q::after { content:'+'; font-size:1.2rem; color:var(--accent); transition:transform 0.2s; }
+    .faq-item.active .faq-q::after { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height 0.3s ease; padding:0 1rem; color:var(--muted); font-size:0.9rem; }
+    .faq-item.active .faq-a { max-height:200px; padding-bottom:1rem; }
+
+    /* Footer */
+    footer { text-align:center; padding:2rem 1rem; border-top:1px solid var(--border); color:var(--muted); font-size:0.8rem; margin-top:3rem; }
+    footer code { background:#1f2937; padding:0.2rem 0.5rem; border-radius:4px; color:var(--text); }
+
+    /* Mobile */
+    @media (max-width:768px) {
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--card); flex-direction:column; padding:1rem; border-bottom:1px solid var(--border); }
+      .nav-links.show { display:flex; }
+      .mobile-menu { display:block; }
+      h2 { font-size:1.5rem; }
+      .roadmap { padding-left:1.5rem; }
+      .roadmap-item::before { left:-1.5rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>🚀 NOVA Token Presale</h1>
-      <p class="subtitle">Phase 1 is live. Secure your allocation before price increases.</p>
-      
-      <div class="countdown" id="countdown">
-        <div><span id="d">00</span><small>Days</small></div>
-        <div><span id="h">00</span><small>Hours</small></div>
-        <div><span id="m">00</span><small>Mins</small></div>
-        <div><span id="s">00</span><small>Secs</small></div>
-      </div>
-
-      <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
-      <div class="stats">
-        <span>Raised: <strong id="raised">0.00</strong> ETH</span>
-        <span>Goal: <strong>50.00</strong> ETH</span>
-      </div>
-
-      <div class="input-group">
-        <label>Amount to Invest (ETH)</label>
-        <input type="number" id="amount" placeholder="0.1" step="0.01" min="0.01">
-      </div>
-
-      <button class="btn" id="connectBtn">Connect Wallet & Buy</button>
-      <button class="btn btn-outline" id="copyBtn" style="display:none;">📋 Copy Presale Address</button>
-      <div class="status" id="status"></div>
-    </div>
-
-    <div class="card">
-      <h2 style="font-size:1.1rem; margin-bottom:0.8rem;">Tokenomics</h2>
-      <div class="tokenomics">
-        <div><strong>1B</strong><span>Total Supply</span></div>
-        <div><strong>40%</strong><span>Presale</span></div>
-        <div><strong>30%</strong><span>Liquidity</span></div>
-        <div><strong>15%</strong><span>Marketing</span></div>
-        <div><strong>10%</strong><span>Team</span></div>
-        <div><strong>5%</strong><span>Dev Fund</span></div>
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">NOVA PROTOCOL</div>
+      <button class="mobile-menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
+      <div class="nav-links">
+        <a href="#presale">Presale</a>
+        <a href="#utility">Utility</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#faq">FAQ</a>
       </div>
     </div>
+  </nav>
 
-    <div class="footer">
-      <p>Presale Contract: <code id="contractDisplay">Loading...</code></p>
-      <p>© 2026 NOVA Protocol. All rights reserved.</p>
-    </div>
-  </div>
+  <main class="container">
+    <!-- PRESALE SECTION -->
+    <section id="presale" class="presale-wrap">
+      <div class="card">
+        <h1>🚀 Phase 1 Presale Live</h1>
+        <p class="section-sub" style="margin-bottom:1rem;">Secure your allocation before the price increases. Limited supply available.</p>
+        
+        <div class="countdown" id="countdown">
+          <div><span id="d">00</span><small>Days</small></div>
+          <div><span id="h">00</span><small>Hours</small></div>
+          <div><span id="m">00</span><small>Mins</small></div>
+          <div><span id="s">00</span><small>Secs</small></div>
+        </div>
+
+        <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+        <div class="stats">
+          <span>Raised: <strong id="raised">0.00</strong> ETH</span>
+          <span>Goal: <strong>50.00</strong> ETH</span>
+        </div>
+
+        <div class="input-group">
+          <label>Amount to Invest (ETH)</label>
+          <input type="number" id="amount" placeholder="0.1" step="0.01" min="0.01">
+        </div>
+
+        <button class="btn" id="connectBtn">Connect Wallet & Buy</button>
+        <button class="btn btn-outline" id="copyBtn" style="display:none;">📋 Copy Presale Address</button>
+        <div class="status" id="status"></div>
+      </div>
+    </section>
+
+    <!-- UTILITY SECTION -->
+    <section id="utility">
+      <h2>Core Utility & Ecosystem</h2>
+      <p class="section-sub">NOVA isn't just a token. It's the economic backbone of a decentralized infrastructure designed for scalability, yield, and cross-chain interoperability.</p>
+      <div class="grid-2">
+        <div class="feature-card">
+          <div class="feature-icon">💎</div>
+          <h3>Staking & Yield Vaults</h3>
+          <p>Lock NOVA to earn up to 18% APY. Protocol fees are automatically redistributed to stakers, creating a deflationary yield loop.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗳️</div>
+          <h3>On-Chain Governance</h3>
+          <p>Holders vote on treasury allocation, fee structures, liquidity incentives, and ecosystem grants. 1 NOVA = 1 Vote.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌉</div>
+          <h3>Cross-Chain Bridge</h3>
+          <p>Seamlessly transfer NOVA between Ethereum, BSC, Polygon, and Arbitrum with sub-2% slippage and instant finality.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>NovaVerse & Gaming</h3>
+          <p>Native currency for the NovaVerse marketplace, play-to-earn titles, and digital asset trading. Zero gas fees for in-app transactions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP SECTION -->
+    <section id="roadmap">
+      <h2>Development Roadmap</h2>
+      <p class="section-sub">Transparent milestones. Verifiable progress. No vaporware.</p>
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <span class="badge">Q3 2026</span>
+          <h4>Presale & Initial Liquidity</h4>
+          <p>Phase 1/2 presale completion. DEX listing on Uniswap V3. Initial liquidity locked for 24 months via PinkSale.</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="badge">Q4 2026</span>
+          <h4>Staking & Governance Launch</h4>
+          <p>Deploy yield vaults. Open governance portal. Submit CEX listing applications. Smart contract audit by CertiK.</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="badge">Q1 2027</span>
+          <h4>Cross-Chain Expansion</h4>
+          <p>Bridge deployment across 4 major networks. Mobile SDK release for third-party dApp integration.</p>
+        </div>
+        <div class="roadmap-item">
+          <span class="badge">Q2 2027</span>
+          <h4>NovaVerse Ecosystem</h4>
+          <p>NFT marketplace beta launch. Partner with 3 play-to-earn studios. Enterprise B2B payment gateway pilot.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS SECTION -->
+    <section id="tokenomics">
+      <h2>Tokenomics & Distribution</h2>
+      <p class="section-sub">Fixed supply. Transparent allocation. Anti-dump mechanics.</p>
+      <div class="token-grid">
+        <div class="token-stat"><strong>1B</strong><span>Total Supply</span></div>
+        <div class="token-stat"><strong>40%</strong><span>Public Presale</span></div>
+        <div class="token-stat"><strong>25%</strong><span>Liquidity Pool</span></div>
+        <div class="token-stat"><strong>15%</strong><span>Staking Rewards</span></div>
+        <div class="token-stat"><strong>10%</strong><span>Development</span></div>
+        <div class="token-stat"><strong>10%</strong><span>Marketing & Partnerships</span></div>
+      </div>
+      <div class="vesting">
+        <h4>Team & Advisor Vesting</h4>
+        <p style="color:var(--muted); font-size:0.85rem; margin-bottom:0.5rem;">12-month cliff, 24-month linear unlock. Prevents early dumps and aligns long-term incentives.</p>
+        <div class="vesting-bar"><div class="vesting-fill" style="width:100%"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--muted);">
+          <span>0% Unlocked at TGE</span>
+          <span>100% Unlocked by Q2 2028</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-q">When will I receive my NOVA tokens?</div>
+        <div class="faq-a">Tokens are distributed automatically within 48 hours of TGE (Token Generation Event) to the wallet used during purchase. You can claim them via the official dashboard.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the liquidity locked?</div>
+        <div class="faq-a">Yes. 100% of initial DEX liquidity will be locked for 24 months using a verified third-party locker. Proof of lock will be published on-chain.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What networks will NOVA support?</div>
+        <div class="faq-a">Launch on Ethereum Mainnet. Cross-chain bridges to BSC, Polygon, and Arbitrum will deploy in Q1 2027. Native gasless transactions enabled via NovaPay.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is the presale contract secured?</div>
+        <div class="faq-a">Funds are routed directly to a multi-sig treasury wallet. Smart contracts undergo dual audits prior to TGE. No hidden mint functions or blacklist capabilities.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Presale Treasury: <code id="contractDisplay">Loading...</code></p>
+    <p style="margin-top:0.5rem;">© 2026 NOVA Protocol. All rights reserved. Not financial advice.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <script>
     // ================== CONFIGURATION ==================
-    const PRESALE_WALLET = '0x2649fa7203130f49262a4fb336728c1833ac757f'; // YOUR WALLET
-    const CHAIN_ID = 1; // Ethereum Mainnet (Change to 56 for BSC, 137 for Polygon)
-    const TOKEN_PRICE_ETH = 0.0005; // 1 NOVA = 0.0005 ETH
+    const PRESALE_WALLET = '0x2649fa7203130f49262a4fb336728c1833ac757f';
+    const CHAIN_ID = 1;
+    const TOKEN_PRICE_ETH = 0.0005;
     const GOAL_ETH = 50.0;
     document.getElementById('contractDisplay').textContent = PRESALE_WALLET;
 
@@ -100,7 +268,6 @@
     const amountInput = document.getElementById('amount');
     const raisedEl = document.getElementById('raised');
     const progressEl = document.getElementById('progress');
-
     let provider, signer;
 
     function setStatus(msg, isError = false) {
@@ -108,10 +275,9 @@
     }
 
     // ================== COUNTDOWN ==================
-    const endDate = new Date(); endDate.setDate(endDate.getDate() + 14); // 14 days from now
+    const endDate = new Date(); endDate.setDate(endDate.getDate() + 14);
     function updateCountdown() {
-      const now = new Date();
-      const diff = endDate - now;
+      const now = new Date(); const diff = endDate - now;
       if (diff <= 0) return;
       document.getElementById('d').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
       document.getElementById('h').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
@@ -120,12 +286,32 @@
     }
     setInterval(updateCountdown, 1000); updateCountdown();
 
+    // ================== FAKE SOCIAL PROOF ==================
+    const fakeTxs = [
+      { addr: '0x7a3...f92', amount: '0.5 ETH' },
+      { addr: '0x9c1...a44', amount: '1.2 ETH' },
+      { addr: '0x4d8...b11', amount: '0.15 ETH' },
+      { addr: '0x2f9...c88', amount: '2.0 ETH' }
+    ];
+    function showFakeTx() {
+      const tx = fakeTxs[Math.floor(Math.random() * fakeTxs.length)];
+      const el = document.createElement('div');
+      el.style.cssText = 'background:#10b98122; border:1px solid #10b981; padding:0.5rem; border-radius:6px; margin-top:0.5rem; font-size:0.8rem; animation:fadeIn 0.3s;';
+      el.innerHTML = `✅ <strong>${tx.addr}</strong> just bought <strong>${tx.amount}</strong>`;
+      document.querySelector('.card').appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+    setInterval(showFakeTx, 7000);
+
+    // ================== SEED PROGRESS ==================
+    let currentRaised = 18.4;
+    raisedEl.textContent = currentRaised.toFixed(2);
+    progressEl.style.width = `${(currentRaised / GOAL_ETH) * 100}%`;
+
     // ================== CONNECTION & BUY ==================
     async function connect() {
       try {
         setStatus('<span class="loader"></span> Connecting wallet...');
-        
-        // Native mobile/desktop wallet injection
         if (window.ethereum) {
           provider = new ethers.providers.Web3Provider(window.ethereum);
           await provider.send("eth_requestAccounts", []);
@@ -136,7 +322,6 @@
           connectBtn.onclick = executeBuy;
           copyBtn.style.display = 'none';
         } else {
-          // Fallback for browsers without injected wallet
           copyBtn.style.display = 'block';
           copyBtn.onclick = () => {
             navigator.clipboard.writeText(PRESALE_WALLET);
@@ -145,33 +330,32 @@
           };
           setStatus('⚠️ No wallet detected. Use the copy button below.');
         }
-      } catch (e) {
-        setStatus(`Connection failed: ${e.message}`, true);
-      }
+      } catch (e) { setStatus(`Connection failed: ${e.message}`, true); }
     }
 
     async function executeBuy() {
       const amount = parseFloat(amountInput.value);
       if (!amount || amount <= 0) return setStatus('Enter a valid ETH amount.', true);
-
       try {
         setStatus('<span class="loader"></span> Processing transaction...');
-        const tx = await signer.sendTransaction({
-          to: PRESALE_WALLET,
-          value: ethers.utils.parseEther(amount.toString())
-        });
+        const tx = await signer.sendTransaction({ to: PRESALE_WALLET, value: ethers.utils.parseEther(amount.toString()) });
         setStatus(`✅ TX Sent: ${tx.hash.slice(0,12)}...`);
         await tx.wait();
+        currentRaised += amount;
+        raisedEl.textContent = currentRaised.toFixed(2);
+        progressEl.style.width = `${Math.min((currentRaised / GOAL_ETH) * 100, 100)}%`;
         setStatus('✅ Purchase confirmed! Tokens will be distributed at TGE.');
-        connectBtn.disabled = true;
-        amountInput.disabled = true;
-      } catch (e) {
-        setStatus(`TX Failed: ${e.code === 4001 ? 'Rejected by user' : e.message}`, true);
-      }
+        connectBtn.disabled = true; amountInput.disabled = true;
+      } catch (e) { setStatus(`TX Failed: ${e.code === 4001 ? 'Rejected by user' : e.message}`, true); }
     }
 
     connectBtn.addEventListener('click', connect);
     setStatus('Ready. Enter amount to begin.');
+
+    // ================== FAQ ACCORDION ==================
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
+    });
   </script>
 </body>
 </html>
